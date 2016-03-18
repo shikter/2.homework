@@ -31,6 +31,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+	<?php
+		echo "<p />Today is " .date('l, jS \of F Y - H:i:s');
+					   //.date("d.m.Y H:i:s");
+
+	?>
+
 <div class="container">
 <section id="application_message">
 	
@@ -162,7 +168,7 @@
 	
 	if($everything_was_okay == true){
 		
-		echo "Sent to database ... ";
+		echo "<br>Sent to database ... ";
 		
 		
 		/**	connection with the username and password
@@ -187,7 +193,7 @@
 		
 		//save
 		if($stmt->execute()){
-			echo "saved sucessfully";
+			echo "<span style='color: red;'>saved sucessfully</span>";
 		}else{
 			echo $stmt->error;
 		}
@@ -195,16 +201,6 @@
 	}
 ?>
 	
-	<br>
-		<hr />
-	
-	<?php
-		echo "<p />Today is " .date('l, jS \of F Y - H:i:s');
-					   //.date("d.m.Y H:i:s");
-
-	?>
-		
-
 		<br>
 			<hr />
 		
@@ -216,8 +212,12 @@
 		<section id="address">
 
 			<br>
-				<address>Beta Version 1.0 © Vadim Kozlov </address>
-				<div class="bkt"><a href="http://localhost:5555/~shikter/homeworks" target="_blank">Homeworks</a></div>
+			<dl class="dl-horizontal">
+				<dt>Beta Version 1.0</dt>
+				<dd>© Vadim Kozlov</dd>
+				<dt>Folders of</dt>
+				<dd><div class="bkt"><a href="http://localhost:5555/~shikter/homeworks" target="_blank">Homeworks</a></div>
+			</dl>
 			<br>
 
 		</section>
