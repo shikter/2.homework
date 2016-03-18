@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
+<base target="_self"">
 <html lang="en">
 
   <head>
@@ -6,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title of the website</title>
+    <title>Little Estonia - My Applications</title>
 	
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
@@ -64,26 +66,6 @@
 			}
 		</script>		
 		
-	<!-- <style>
-		
-   table {
-	border:1px solid;
-    width: 1000px; 		
-	border-collapse: collapse;
-    margin: auto;		 
-   }
-   th { 
-    text-align: left; 		 /* Выравнивание по левому краю */
-    background: #ccc; 		 /* Цвет фона ячеек */
-    padding: 5px; 			 /* Поля вокруг содержимого ячеек */
-    border: 1px solid black; /* Граница вокруг ячеек */
-   }
-   td { 
-    padding: 5px; 			 /* Поля вокруг содержимого ячеек */
-    border: 1px solid black; /* Граница вокруг ячеек */
-	text-align: center; 
- 
-	</style> -->
 	
   </head>
   
