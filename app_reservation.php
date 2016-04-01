@@ -1,4 +1,41 @@
-﻿<?php require_once("header.php");?>
+﻿<?php
+
+			require_once("../../../config.php");
+
+
+				$dataExists = false;
+				if ($_SERVER["REQUEST_METHOD"] == "POST"){
+					$Login_id = $_POST["Login_id"];
+					$name = $_POST["name"];
+					$date = $_POST["date"];
+					$genre = $_POST["genre"];
+					$description = $_POST["description"];
+						
+					if($name && $Login_id && $date && $genre){
+						$dataExists = true;
+						$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_shikter");
+						
+						$stmt = $mysql->prepare("INSERT INTO Reservation(Login, Name, reserv_date, label_genre, description) VALUES(?,?,?,?,?)");
+						
+						//echo error
+						echo $mysql->error;
+						
+						// for each question mark its type with one letter
+						$stmt->bind_param("sssss", $_POST["Login_id"], $_POST["name"], $_POST["date"], $_POST["genre"], $_POST["description"]);
+						
+						//save
+						if($stmt->execute()){
+							echo "saved sucessfully";
+						}else{
+							echo $stmt->error;
+						}
+					}
+				}
+?>
+
+<?php require_once("header.php");?>
+
+
 
 <figure id="tlu_logo"><img border=none src="http://www.tlu.ee/~shikter/ristmed2/images/TLU_logo.jpg" alt="TLU" width="200"></figure>
 <br>
@@ -36,42 +73,6 @@
 					   //.date("d.m.Y H:i:s");
 
 	?>
-
-
-	<?php
-
-			require_once("../../../config.php");
-
-
-				$dataExists = false;
-				if ($_SERVER["REQUEST_METHOD"] == "POST"){
-					$Login_id = $_POST["Login_id"];
-					$name = $_POST["name"];
-					$date = $_POST["date"];
-					$genre = $_POST["genre"];
-					$description = $_POST["description"];
-						
-					if($name && $Login_id && $date && $genre){
-						$dataExists = true;
-						$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_shikter");
-						
-						$stmt = $mysql->prepare("INSERT INTO Reservation(Login, Name, reserv_date, label_genre, description) VALUES(?,?,?,?,?)");
-						
-						//echo error
-						echo $mysql->error;
-						
-						// for each question mark its type with one letter
-						$stmt->bind_param("sssss", $_POST["Login_id"], $_POST["name"], $_POST["date"], $_POST["genre"], $_POST["description"]);
-						
-						//save
-						if($stmt->execute()){
-							echo "saved sucessfully";
-						}else{
-							echo $stmt->error;
-						}
-					}
-				}
-	?>
 	
 	
 	<div class="container">
@@ -103,6 +104,7 @@
 	
 	<form id="dataForm" method="post" onsubmit="return validate();" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	
+		<br>
 		<table border="0">
 			<tr>
 				<td width="185">

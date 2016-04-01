@@ -64,6 +64,7 @@
 				document.getElementById('errors').innerHTML = error;
 				return formIsValid;
 			}
+			
 		</script>		
 		
 	

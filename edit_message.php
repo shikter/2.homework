@@ -1,6 +1,4 @@
-﻿<?php require_once("header.php");?>
-
-	<?php
+﻿<?php
 
 	//require another php file
 	// ../../../ means > 3 folders back
@@ -94,6 +92,8 @@
 	}
 ?>
 
+<?php require_once("header.php");?>
+
 <figure id="tlu_logo"><img border=none src="http://www.tlu.ee/~shikter/ristmed2/images/TLU_logo.jpg" alt="TLU" width="200"></figure>
 <br>
 
@@ -186,9 +186,6 @@
 	
 	<br>
 	
-
-	
-		<br>
 			<hr />
 		
 	</section>
