@@ -133,6 +133,7 @@
 			$table_html .="<th><center>Message</center></th>";
 			$table_html .="<th><center>Sender</center></th>";
 			$table_html .="<th><center>Created</center></th>";
+			$table_html .="<th><center>Edit</center></th>";
 			$table_html .="<th><center>Delete?</center></th>";
 		
 		$table_html .="</tr>"; //end row
@@ -151,6 +152,7 @@
 			$table_html .="<td>".$message."</td>";
 			$table_html .="<td>".$sender."</td>";
 			$table_html .="<td>".$created."</td>";
+			$table_html .="<td><a class='btn btn-warning' href='edit_message.php?edit=".$id."'>Edit</a></td>";
 			$table_html .="<td><a class='btn btn-danger' href='?delete=".$id."'>X</a></td>";
 			
 		$table_html .="</tr>"; //end row
@@ -226,6 +228,7 @@
 			$table2_html .="<th><center>Type</center></th>";
 			$table2_html .="<th><center>Description</center></th>";
 			$table2_html .="<th><center>Time</center></th>";
+			$table2_html .="<th><center>Edit</center></th>";
 			$table2_html .="<th><center>Delete?</center></th>";
 		
 		$table2_html .="</tr>"; //end row
@@ -247,6 +250,7 @@
 			$table2_html .="<td>".$label_genre."</td>";
 			$table2_html .="<td>".$description."</td>";
 			$table2_html .="<td>".$time_created."</td>";
+			$table2_html .="<td><a class='btn btn-warning' href='edit_reservation.php?edit=".$id."'>Edit</a></td>";
 			$table2_html .="<td><a class='btn btn-danger' href='?delete=".$id."'>X</a></td>";
 			
 		$table2_html .="</tr>"; //end row
