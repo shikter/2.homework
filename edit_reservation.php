@@ -1,4 +1,116 @@
-﻿<?php require_once("header.php");?>
+﻿<?php
+
+	//require another php file
+	// ../../../ means > 3 folders back
+	require_once("../../../config.php");
+	
+	//the variable does not exists in the URL
+	if(!isset($_GET["edit"])){
+		
+		//redirect user
+		echo "redirect";
+		
+		header("Location: tables.php");
+		exit(); //don't execute further
+		
+	}else{
+		echo "<h4>"."> <strong>You want to edit row: "."<span style='color: red;'>".$_GET["edit"]."</span></strong>"."</h4>" ;
+		
+		//ask for latest data for single row
+		$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_shikter");
+		
+		// maybe user wants to update data after clicking the button
+		//echo $_GET["who"];
+		if(isset($_GET["who"]) && isset($_GET["message"]) && isset($_GET["from_who"])){
+			
+			echo "<br>User modified data...";
+			
+			//should be validation
+			
+			$stmt = $mysql->prepare("UPDATE messages_sample SET recipient=?, message=?, sender=? WHERE id=?");
+			
+			echo $mysql->error;
+			
+			$stmt->bind_param("sssi", $_GET["who"], $_GET["message"], $_GET["from_who"], $_GET["edit"]);
+			
+			if($stmt->execute()){
+				
+				echo "<br><h4><strong><span style='color:red'>Saved successfully</span></strong></h4>";
+				
+				// option one - redirect:
+				
+				//header("Location: tables.php");
+				//exit();
+				
+				// option two - update variables:
+				
+				echo "<br><strong><span style='color:green'>Changed to:</span></strong><br>";
+				
+				
+				echo "<br><strong>Name of recipient: </strong>".$recipient = $_GET["who"];
+				echo "<br><strong>Message: </strong>".$message = $_GET["message"];
+				echo "<br><strong>Sender name: </strong>".$sender = $_GET["from_who"];
+				$id = $_GET["edit"];
+				
+				echo "<br>"."-------------------------------------";
+				
+				
+				/*
+				echo 
+			
+				'<div>
+				
+				<br><strong>Name of recipient: </strong> <span style="color: red;">.$recipient = $_GET["who"].</span>
+				<br><strong>Message: </strong> <span style="color: red;">.$message = $_GET["message"].</span>
+				<br><strong>Sender name: </strong> <span style="color: red;">.$sender = $_GET["from_who"].</span>
+				<br>USER ID: $id = $_GET["edit"].
+				
+				</div>
+				<br>
+				';
+				*/
+				
+			}else{
+				
+				echo $stmt->error;
+			}
+			
+			
+		}else{
+			
+					//user did not click any buttons yet,
+					//give user latest data from db
+					
+					$stmt = $mysql->prepare("SELECT id, recipient, message, sender, created FROM messages_sample WHERE id=?");
+				
+				echo $mysql->error;
+				
+				//replace the ? mark
+				$stmt->bind_param("i", $_GET["edit"]);
+				
+				//bind result data
+				$stmt->bind_result($id, $recipient, $message, $sender, $created);
+				
+				$stmt->execute();
+				//we have only 1 row of data
+				if($stmt->fetch()){
+					
+					//we had data
+					echo "<h4>"."> <i>Filled field:</i> | "."<strong>".$recipient." ; ".$message." ; ".$sender."</strong>"." | <i>which was created:</i> "."<strong>".$created."</strong>"."</h4>";
+					
+				}else{
+					
+					//smth went wrong
+					echo $stmt->error;
+				}
+		
+			}
+		
+		
+	}
+?>
+
+<?php require_once("header.php");?>
 
 <figure id="tlu_logo"><img border=none src="http://www.tlu.ee/~shikter/ristmed2/images/TLU_logo.jpg" alt="TLU" width="200"></figure>
 <br>
@@ -36,66 +148,10 @@
 					   //.date("d.m.Y H:i:s");
 
 	?>
-
-
-	<?php
-
-			require_once("../../../config.php");
-
-
-				$dataExists = false;
-				if ($_SERVER["REQUEST_METHOD"] == "POST"){
-					$Login_id = $_POST["Login_id"];
-					$name = $_POST["name"];
-					$date = $_POST["date"];
-					$genre = $_POST["genre"];
-					$description = $_POST["description"];
-						
-					if($name && $Login_id && $date && $genre){
-						$dataExists = true;
-						$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_shikter");
-						
-						$stmt = $mysql->prepare("INSERT INTO Reservation(Login, Name, reserv_date, label_genre, description) VALUES(?,?,?,?,?)");
-						
-						//echo error
-						echo $mysql->error;
-						
-						// for each question mark its type with one letter
-						$stmt->bind_param("sssss", $_POST["Login_id"], $_POST["name"], $_POST["date"], $_POST["genre"], $_POST["description"]);
-						
-						//save
-						if($stmt->execute()){
-							echo "saved sucessfully";
-						}else{
-							echo $stmt->error;
-						}
-					}
-				}
-	?>
 	
 	
 	<div class="container">
 	<section id="application_reservation">
-		
-	<?php
-		if($dataExists){
-			echo 
-			
-			"<div>
-			
-			<br>Login: $Login_id
-			<br>Name: $name
-			<br>Date: $date
-			<br>Type of shooting: $genre
-			<br>Description: $description
-			
-			<br><br>Sent to database ... <span style='color: red;'>saved sucessfully</span>
-			</div>
-			<br>
-			";
-		}
-		
-	?>
 		
 	<h2>Reservation form:</h2>
 	<div id="errors" style="color: red;"></div>

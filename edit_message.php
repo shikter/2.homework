@@ -14,7 +14,7 @@
 		exit(); //don't execute further
 		
 	}else{
-		echo "User want to edit row: ".$_GET["edit"] ;
+		echo "<h4>"."> <strong>You want to edit row: "."<span style='color: red;'>".$_GET["edit"]."</span></strong>"."</h4>" ;
 		
 		//ask for latest data for single row
 		$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_shikter");
@@ -23,7 +23,7 @@
 		//echo $_GET["who"];
 		if(isset($_GET["who"]) && isset($_GET["message"]) && isset($_GET["from_who"])){
 			
-			echo "<br>User modified data, tries to save...";
+			echo "<br>User modified data...";
 			
 			//should be validation
 			
@@ -35,7 +35,7 @@
 			
 			if($stmt->execute()){
 				
-				echo "<br><h4><strong><span style='color:green'>Saved successfully</span></strong></h4>";
+				echo "<br><h4><strong><span style='color:red'>Saved successfully</span></strong></h4>";
 				
 				// option one - redirect:
 				
@@ -44,13 +44,31 @@
 				
 				// option two - update variables:
 				
-				echo "<br><strong><span style='color:red'>Changed to:</span></strong><br>";
+				echo "<br><strong><span style='color:green'>Changed to:</span></strong><br>";
 				
-				echo "<strong>Name of recipient: </strong>" .$recipient = $_GET["who"]."<br>";
-				echo "<strong>Message: </strong>" .$message = $_GET["message"]."<br>";
-				echo "<strong>Sender name: </strong>" .$sender = $_GET["from_who"]."<br>";
+				
+				echo "<br><strong>Name of recipient: </strong>".$recipient = $_GET["who"];
+				echo "<br><strong>Message: </strong>".$message = $_GET["message"];
+				echo "<br><strong>Sender name: </strong>".$sender = $_GET["from_who"];
 				$id = $_GET["edit"];
 				
+				echo "<br>"."-------------------------------------";
+				
+				
+				/*
+				echo 
+			
+				'<div>
+				
+				<br><strong>Name of recipient: </strong> <span style="color: red;">.$recipient = $_GET["who"].</span>
+				<br><strong>Message: </strong> <span style="color: red;">.$message = $_GET["message"].</span>
+				<br><strong>Sender name: </strong> <span style="color: red;">.$sender = $_GET["from_who"].</span>
+				<br>USER ID: $id = $_GET["edit"].
+				
+				</div>
+				<br>
+				';
+				*/
 				
 			}else{
 				
@@ -78,7 +96,7 @@
 				if($stmt->fetch()){
 					
 					//we had data
-					echo $id." ".$recipient." ".$message." ".$sender." ".$created;
+					echo "<h4>"."> <i>Filled field:</i> | "."<strong>".$recipient." ; ".$message." ; ".$sender."</strong>"." | <i>which was created:</i> "."<strong>".$created."</strong>"."</h4>";
 					
 				}else{
 					
