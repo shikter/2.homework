@@ -81,7 +81,7 @@
 					//user did not click any buttons yet,
 					//give user latest data from db
 					
-					$stmt = $mysql->prepare("SELECT id, recipient, message, sender, created FROM messages_sample WHERE id=?");
+					$stmt = $mysql->prepare("SELECT id, recipient, message, sender, created FROM Reservation WHERE id=?");
 				
 				echo $mysql->error;
 				

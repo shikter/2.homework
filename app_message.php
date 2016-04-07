@@ -174,7 +174,7 @@
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
 								<li><label for="message">Message<span style="color: red;">*</span>: </label></li>
-								<input name="message" id="message" type="text" class="form-control" style="height: 75px;" valign="top">
+								<textarea name="message" id="message" class="form-control" style="height: 75px; width: 100%;" valign="top"></textarea>
 							</div>
 						</div>
 					</div>

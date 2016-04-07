@@ -128,7 +128,7 @@
 	$table_html .="<table class='table table-striped'>";
 		$table_html .="<tr>";//start new row
 		
-			$table_html .="<th><center>ID</center></th>";
+			$table_html .="<th><center>ID / Row</center></th>";
 			$table_html .="<th><center>Recipient</center></th>";
 			$table_html .="<th><center>Message</center></th>";
 			$table_html .="<th><center>Sender</center></th>";

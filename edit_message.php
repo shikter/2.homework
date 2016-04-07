@@ -53,6 +53,7 @@
 				$id = $_GET["edit"];
 				
 				echo "<br>"."-------------------------------------";
+				echo "<br> Go back to <a href='tables.php'>Tables Page</a>";
 				
 				
 				/*

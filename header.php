@@ -19,10 +19,29 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 		
+		 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		
 		<meta charset="UTF-8"> <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
 		<base target="_self"">
-		<link rel="stylesheet" type="text/css" href="app.css">
+		<!--<link rel="stylesheet" type="text/css" href="app.css">-->
 		
+		
+		
+		
+		
+		  <script>
+		  $(function() {
+			$( ".datepicker" ).datepicker();
+		  });
+		  </script>
+		  
+		  <!-- $( ".datepicker" ).datepicker( Дополнительные ФУНКЦИИ ПИСАТЬ СЮДА ); -->
+		  
+		  
+		  
+		  
+				
 		 <script type="text/javascript">
 		
 		    function validate(){
