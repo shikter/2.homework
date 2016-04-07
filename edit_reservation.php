@@ -250,7 +250,7 @@
 				<div class="row">
 						<div class="col-md-3 col-sm-6">
 								<div class="form-group">
-									<input name="description" type="text" class="form-control" style="width: 300px; height: 120px;" value="<?=$description?>"></textarea>
+									<input name="description" type="text" class="form-control" style="width: 300px; height: 120px;" value="<?=$description?>">
 							</div>
 						</div>
 					</div>
