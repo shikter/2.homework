@@ -33,7 +33,12 @@
 		  <script>
 		  $(function() {
 			$( ".datepicker" ).datepicker();
-		  });
+				$( ".format" ).change(function("d MM, yy"){
+					$( ".anim" ).change(function("blind") {
+						$( ".datepicker" ).datepicker( "dateFormat", "option", "showAnim", $( this ).val() );
+												});
+													});
+						});
 		  </script>
 		  
 		  <!-- $( ".datepicker" ).datepicker( Дополнительные ФУНКЦИИ ПИСАТЬ СЮДА ); -->

@@ -22,16 +22,16 @@
 		// maybe user wants to update data after clicking the button
 		//echo $_GET["who"];
 		if(isset($_GET["who"]) && isset($_GET["message"]) && isset($_GET["from_who"])){
-			
+			//$name && $Login_id && $date && $genre
 			echo "<br>User modified data...";
 			
 			//should be validation
 			
-			$stmt = $mysql->prepare("UPDATE messages_sample SET recipient=?, message=?, sender=? WHERE id=?");
+			$stmt = $mysql->prepare("UPDATE Reservation SET Login=?, Name=?, reserv_date=?, label_genre=?, description=? WHERE id=?");
 			
 			echo $mysql->error;
 			
-			$stmt->bind_param("sssi", $_GET["who"], $_GET["message"], $_GET["from_who"], $_GET["edit"]);
+			$stmt->bind_param("sssssi", $_POST["Login_id"], $_POST["name"], $_POST["date"], $_POST["genre"], $_POST["description"], $_GET["edit"]);
 			
 			if($stmt->execute()){
 				
@@ -47,9 +47,11 @@
 				echo "<br><strong><span style='color:green'>Changed to:</span></strong><br>";
 				
 				
-				echo "<br><strong>Name of recipient: </strong>".$recipient = $_GET["who"];
-				echo "<br><strong>Message: </strong>".$message = $_GET["message"];
-				echo "<br><strong>Sender name: </strong>".$sender = $_GET["from_who"];
+				echo "<br><strong>Name of recipient: </strong>".$Login = $_GET["Login_id"];
+				echo "<br><strong>Message: </strong>".$Name = $_GET["name"];
+				echo "<br><strong>Sender name: </strong>".$reserv_date = $_GET["date"];
+				echo "<br><strong>Message: </strong>".$label_genre = $_GET["genre"];
+				echo "<br><strong>Sender name: </strong>".$description = $_GET["description"];
 				$id = $_GET["edit"];
 				
 				echo "<br>"."-------------------------------------";
@@ -81,7 +83,7 @@
 					//user did not click any buttons yet,
 					//give user latest data from db
 					
-					$stmt = $mysql->prepare("SELECT id, recipient, message, sender, created FROM Reservation WHERE id=?");
+					$stmt = $mysql->prepare("SELECT id, Login, Name, reserv_date, label_genre, description, time_created FROM Reservation WHERE id=?");
 				
 				echo $mysql->error;
 				
@@ -89,14 +91,14 @@
 				$stmt->bind_param("i", $_GET["edit"]);
 				
 				//bind result data
-				$stmt->bind_result($id, $recipient, $message, $sender, $created);
+				$stmt->bind_result($id, $Login, $Name, $reserv_date, $label_genre, $description, $time_created);
 				
 				$stmt->execute();
 				//we have only 1 row of data
 				if($stmt->fetch()){
 					
 					//we had data
-					echo "<h4>"."> <i>Filled field:</i> | "."<strong>".$recipient." ; ".$message." ; ".$sender."</strong>"." | <i>which was created:</i> "."<strong>".$created."</strong>"."</h4>";
+					echo "<h4>"."> <i>Filled field:</i> | "."<strong>[".$Login."] | [".$Name."] | [".$reserv_date."] | [".$label_genre."] | [".$description."]</strong>"." | <i>which was created:</i> "."<strong>".$time_created."</strong>"."</h4>";
 					
 				}else{
 					
@@ -169,7 +171,7 @@
 					<div class="row">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
-		<input type="text" name="Login_id" id="Login_id" class="form-control" style="width: 300px;" placeholder="User name">
+		<input type="text" name="Login_id" id="Login_id" class="form-control" style="width: 300px;" value="<?=$Login?>">
 							</div>
 						</div>
 					</div>
@@ -185,7 +187,7 @@
 					<div class="row">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
-		<input type="text"  name="name" id="name" class="form-control" style="width: 300px;" placeholder="Your full name">
+		<input type="text"  name="name" id="name" class="form-control" style="width: 300px;" value="<?=$Name?>">
 							</div>
 						</div>
 					</div>
@@ -201,7 +203,7 @@
 					<div class="row">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
-		<input type="date" name="date" id="date" class="form-control" style="width: 300px;" placeholder="31.12.2016">
+		<input type="date" name="date" id="date" class="form-control" style="width: 300px;" value="<?=$reserv_date?>">
 							</div>
 						</div>
 					</div>
@@ -217,8 +219,9 @@
 					<div class="row">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
-								<select id="genre" name="genre" class="form-control" style="width: 300px;" placeholder="Genre">
+								<select id="genre" name="genre" class="form-control" style="width: 300px;">
 									<!-- <option value="notselected">Pick a category:</option>  NOT WORKING > without IF and ELSE. -->
+									<option><?=$label_genre?></option>
 									<option></option>
 									<option>Clip movie</option>
 									<option>Advertisement</option>
@@ -247,7 +250,7 @@
 				<div class="row">
 						<div class="col-md-3 col-sm-6">
 								<div class="form-group">
-									<textarea name="description" type="text" class="form-control" style="width: 300px; height: 120px;"></textarea>
+									<input name="description" type="text" class="form-control" style="width: 300px; height: 120px;" value="<?=$description?>"></textarea>
 							</div>
 						</div>
 					</div>

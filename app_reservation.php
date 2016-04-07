@@ -147,7 +147,7 @@
 					<div class="row">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-6">
-		<input type="text" name="date" id="date" class="form-control datepicker" style="width: 300px;" placeholder="31.12.2016">
+		<input type="text" name="date" id="datepicker" size="30" class="form-control datepicker" style="width: 300px;" placeholder="31.12.2016">
 							</div>
 						</div>
 					</div>
